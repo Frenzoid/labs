@@ -60,10 +60,12 @@ class Device:
 
 # --- Main ---  #
 if __name__ == "__main__":
+
     # List of devices.
     devices = []
     devices.append(Device("Frenzoid", '192.168.1.76'))
     devices.append(Device("Livia", '192.168.1.82'))
+    devices.append(Device("Emil", '192.168.1.40'))
 
     # Ping response.
     response = ''
