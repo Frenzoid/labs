@@ -76,13 +76,59 @@ contract Token {
 
 
 // -- Struct Types.
-contract Ballot {
-    struct Voter { // Struct
-        uint weight;
-        bool voted;
-        address delegate;
-        uint vote;
+// Defines a new type with two fields.
+// Declaring a struct outside of a contract allows
+// it to be shared by multiple contracts.
+// Here, this is not really needed.
+struct Funder {
+    address addr;
+    uint amount;
+}
+
+contract CrowdFunding {
+    // Structs can also be defined inside contracts, which makes them
+    // visible only there and in derived contracts.
+    struct Campaign {
+        address payable beneficiary;
+        uint fundingGoal;
+        uint numFunders;
+        uint amount;
+        mapping (uint => Funder) funders;
     }
+
+    uint numCampaigns;
+    mapping (uint => Campaign) campaigns;
+
+    function newCampaign(address payable beneficiary, uint goal) public returns (uint campaignID) {
+        campaignID = numCampaigns++; // campaignID is return variable
+        // We cannot use "campaigns[campaignID] = Campaign(beneficiary, goal, 0, 0)"
+        // because the RHS creates a memory-struct "Campaign" that contains a mapping.
+        // "Right Hand Side" As in referring to the right part of the statement campaigns[campaignID] = Campaign(beneficiary, goal, 0, 0) i.e They are saying that Campaign(beneficiary, goal, 0, 0) is creating a struct in-memory.
+        
+        Campaign storage c = campaigns[campaignID];
+        c.beneficiary = beneficiary;
+        c.fundingGoal = goal;
+    }
+
+    function contribute(uint campaignID) public payable {
+        Campaign storage c = campaigns[campaignID];
+        // Creates a new temporary memory struct, initialised with the given values
+        // and copies it over to storage.
+        // Note that you can also use Funder(msg.sender, msg.value) to initialise.
+        c.funders[c.numFunders++] = Funder({addr: msg.sender, amount: msg.value});
+        c.amount += msg.value;
+    }
+
+    function checkGoalReached(uint campaignID) public returns (bool reached) {
+        Campaign storage c = campaigns[campaignID];
+        if (c.amount < c.fundingGoal)
+            return false;
+        uint amount = c.amount;
+        c.amount = 0;
+        c.beneficiary.transfer(amount);
+        return true;
+    }
+    // Note how in the functions, a struct type is assigned to a local variable with data location storage. This does not copy the struct but only stores a reference so that assignments to members of the local variable actually write to the state.
 }
 
 
@@ -236,6 +282,79 @@ You can think of storage as a large array that has a virtual structure a structu
 
 
 Since enum types are not part of the ABI, the signature of the enum automatically be changed to "uint8" for all matters external to Solidity.
+
+
+Accessing an array past its end causes a failing assertion. Methods .push() and .push(value) can be used to append a new element at the end of the array, where .push() appends a zero-initialized element and returns a reference to it.
+
+
+Data locations are not only relevant for persistency of data, but also for the semantics of assignments:
+
+Assignments between storage and memory (or from calldata) always create an independent copy.
+Assignments from memory to memory only create references. This means that changes to one memory variable are also visible in all other memory variables that refer to the same data.
+Assignments from storage to a local storage variable also only assign a reference.
+All other assignments to storage always copy. Examples for this case are assignments to state variables or to members of local variables of storage struct type, even if the local variable itself is just a reference.
+
+
+Variables of type bytes and string are special arrays. A bytes is similar to byte[], but it is packed tightly in calldata and memory. string is equal to bytes but does not allow length or index access.
+
+
+Solidity does not have string manipulation functions, but there are third-party string libraries. You can also compare two strings by their keccak256-hash using keccak256(abi.encodePacked(s1)) == keccak256(abi.encodePacked(s2)) and concatenate two strings using bytes.concat(bytes(s1), bytes(s2)).
+
+
+If you want to access the byte-representation of a string s, use bytes(s).length / bytes(s)[7] = 'x';. Keep in mind that you are accessing the low-level bytes of the UTF-8 representation, and not the individual characters.
+
+
+You can concatenate a variable number of bytes or bytes1 ... bytes32 using bytes.concat. The function returns a single bytes memory array that contains the contents of the arguments without padding. If you want to use string parameters or other types, you need to convert them to bytes or bytes1/…/bytes32 first.
+*/
+contract C {
+    bytes s = "Storage";
+    function f(bytes calldata c, string memory m, bytes16 b) public view {
+        bytes memory a = bytes.concat(s, c, c[:2], "Literal", bytes(m), b);
+        assert((s.length + c.length + 2 + 7 + bytes(m).length + 16) == a.length);
+    }
+}
+/*
+If you call bytes.concat without arguments it will return an empty bytes array.
+
+
+
+Fixed size memory arrays cannot be assigned to dynamically-sized memory arrays, i.e. the following is not possible:
+It is planned to remove this restriction in the future, but it creates some complications because of how arrays are passed in the ABI.
+If you want to initialize dynamically-sized arrays, you have to assign the individual elementsÇ:
+*/
+contract C {
+    function f() public pure {
+        uint[] memory x = new uint[](3);
+        x[0] = 1;
+        x[1] = 3;
+        x[2] = 4;
+    }
+}
+/*
+
+
+Array slices are a view on a contiguous portion of an array. They are written as x[start:end], where start and end are expressions resulting in a uint256 type (or implicitly convertible to it). The first element of the slice is x[start] and the last element is x[end - 1].
+If start is greater than end or if end is greater than the length of the array, an exception is thrown.
+Both start and end are optional: start defaults to 0 and end defaults to the length of the array.
+Array slices do not have any members. They are implicitly convertible to arrays of their underlying type and support index access. Index access is not absolute in the underlying array, but relative to the start of the slice.
+Array slices do not have a type name which means no variable can have an array slices as type, they only exist in intermediate expressions.
+As of now, array slices are only implemented for calldata arrays.
+*/
+
+
+function newCampaign(address payable beneficiary, uint goal) public returns (uint campaignID) {
+        campaignID = numCampaigns++; // campaignID is return variable
+        
+        // We cannot use "campaigns[campaignID] = Campaign(beneficiary, goal, 0, 0)"
+        // because the RHS creates a memory-struct "Campaign" that contains a mapping.
+        // "Right Hand Side" As in referring to the right part of the statement campaigns[campaignID] = Campaign(beneficiary, goal, 0, 0) i.e They are saying that Campaign(beneficiary, goal, 0, 0) is creating a struct in-memory.
+        
+        Campaign storage c = campaigns[campaignID];
+        c.beneficiary = beneficiary;
+        c.fundingGoal = goal;
+}
+/*
+
 
 
 
