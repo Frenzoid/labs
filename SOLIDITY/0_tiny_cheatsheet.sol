@@ -86,4 +86,7 @@ contract Ballot {
 // - Enum Types.
 contract Purchase {
     enum State { Created, Locked, Inactive } // Enum
+    
+    // The state variable has a default value of the first member, `State.created`
+    State public state;
 }
