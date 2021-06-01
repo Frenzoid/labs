@@ -142,12 +142,19 @@ Implicit conversions from address payable to address are allowed, whereas conver
 */
 
 // --- Fixed-size byte arrays.
-bytes1 byte = "a";             // The value types bytes1, bytes2, bytes3, …, bytes32 hold a sequence of bytes from one to up to 32.
+bytes1 byte_var = "a";         // The value types bytes1, bytes2, bytes3, …, bytes32 hold a sequence of bytes from one to up to 32.
 bytes byte_array = "abcdfg";   // Dynamically-sized byte array, see Arrays. Not a value-type!
 string string_var = "Hello";   // Dynamically-sized UTF-8-encoded string, see Arrays. Not a value-type!
 
+// Remember, bytes types are processed as an array of bytes, implicit string literals are parsed to bytes, and they will be processed as such!
+
 // While regular string literals can only contain ASCII, Unicode literals – prefixed with the keyword unicode – can contain any valid UTF-8 sequence. They also support the very same escape sequences as regular string literals.
-string memory a = unicode "Hello 😃";
+string a = unicode"Hello 😃";
+
+if (keccak256(bytes(string_var)) == keccak256(bytes("Hello"))
+ && keccak256(bytes(byte_array)) == keccak256(bytes("abcdfg"))) { // true
+    // ...
+}
 
 /*
     Comparisons: <=, <, ==, !=, >=, > (evaluate to bool)
