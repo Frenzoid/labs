@@ -457,8 +457,7 @@ bytes2 f = "xyz"; // not allowed
 
 /*
 As described in Address Literals, hex literals of the correct size that pass the checksum test are of address type. No other literals can be implicitly converted to the address type.
-
 Explicit conversions from bytes20 or any integer type to address result in address payable.
-
 An address a can be converted to address payable via payable(a).
+Hexadecimal literals that pass the address checksum test, for example 0xdCad3a6d3569DF655070DEd06cb7A1b2Ccd1D3AF are of address type. Hexadecimal literals that are between 39 and 41 digits long and do not pass the checksum test produce an error. You can prepend (for integer types) or append (for bytesNN types) zeros to remove the error.
 */
