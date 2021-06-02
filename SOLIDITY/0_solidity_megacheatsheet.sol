@@ -485,25 +485,23 @@ function f(uint start, uint daysAfter) public {
 }
 
 
-/*
-Special Variables and Functions
-There are special variables and functions which always exist in the global namespace and are mainly used to provide information about the blockchain or are general-use utility functions.
+// Special Variables and Functions
+// There are special variables and functions which always exist in the global namespace and are mainly used to provide information about the blockchain or are general-use utility functions.
 
-Block and Transaction Properties
-blockhash(uint blockNumber) returns (bytes32): hash of the given block when blocknumber is one of the 256 most recent blocks; otherwise returns zero
-block.chainid (uint): current chain id
-block.coinbase (address payable): current block miner’s address
-block.difficulty (uint): current block difficulty
-block.gaslimit (uint): current block gaslimit
-block.number (uint): current block number
-block.timestamp (uint): current block timestamp as seconds since unix epoch
-gasleft() returns (uint256): remaining gas
-msg.data (bytes calldata): complete calldata
-msg.sender (address): sender of the message (current call)
-msg.sig (bytes4): first four bytes of the calldata (i.e. function identifier)
-msg.value (uint): number of wei sent with the message
-tx.gasprice (uint): gas price of the transaction
-tx.origin (address): sender of the transaction (full call chain)
-*/
+blockhash(uint blockNumber);    // returns (bytes32): hash of the given block when blocknumber is one of the 256 most recent blocks; otherwise returns zero
+block.chainid;                  //  (uint): current chain id
+block.coinbase;                 //  (address payable): current block miner’s address
+block.difficulty;               //  (uint): current block difficulty
+block.gaslimit;                 //  (uint): current block gaslimit
+block.number;                   //  (uint): current block number
+block.timestamp;                //  (uint): current block timestamp as seconds since unix epoch
+gasleft();                      //  returns (uint256): remaining gas
+msg.data;                       //  (bytes calldata): complete calldata
+msg.sender;                     //  (address): sender of the message (current call)
+msg.sig;                        //  (bytes4): first four bytes of the calldata (i.e. function identifier)
+msg.value;                      //  (uint): number of wei sent with the message
+tx.gasprice;                    //  (uint): gas price of the transaction
+tx.origin;                      //  (address): sender of the transaction (full call chain)
+
 
 
