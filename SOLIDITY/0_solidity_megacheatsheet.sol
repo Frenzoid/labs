@@ -461,3 +461,49 @@ Explicit conversions from bytes20 or any integer type to address result in addre
 An address a can be converted to address payable via payable(a).
 Hexadecimal literals that pass the address checksum test, for example 0xdCad3a6d3569DF655070DEd06cb7A1b2Ccd1D3AF are of address type. Hexadecimal literals that are between 39 and 41 digits long and do not pass the checksum test produce an error. You can prepend (for integer types) or append (for bytesNN types) zeros to remove the error.
 */
+
+
+// A literal number can take a suffix of wei, gwei or ether to specify a subdenomination of Ether, where Ether numbers without a postfix are assumed to be Wei.
+assert(1 wei == 1);
+assert(1 gwei == 1e9);
+assert(1 ether == 1e18);
+
+
+// Suffixes like seconds, minutes, hours, days and weeks after literal numbers can be used to specify units of time where seconds are the base unit and units are considered naively in the following way:
+1 == 1 seconds
+1 minutes == 60 seconds
+1 hours == 60 minutes
+1 days == 24 hours
+1 weeks == 7 days
+// Take care if you perform calendar calculations using these units, because not every year equals 365 days and not even every day has 24 hours because of leap seconds. Due to the fact that leap seconds cannot be predicted, an exact calendar library has to be updated by an external oracle.
+// The suffix years has been removed in version 0.5.0 due to the reasons above.
+// These suffixes cannot be applied to variables. For example, if you want to interpret a function parameter in days, you can in the following way:
+function f(uint start, uint daysAfter) public {
+    if (block.timestamp >= start + daysAfter * 1 days) {
+      // ...
+    }
+}
+
+
+/*
+Special Variables and Functions
+There are special variables and functions which always exist in the global namespace and are mainly used to provide information about the blockchain or are general-use utility functions.
+
+Block and Transaction Properties
+blockhash(uint blockNumber) returns (bytes32): hash of the given block when blocknumber is one of the 256 most recent blocks; otherwise returns zero
+block.chainid (uint): current chain id
+block.coinbase (address payable): current block miner’s address
+block.difficulty (uint): current block difficulty
+block.gaslimit (uint): current block gaslimit
+block.number (uint): current block number
+block.timestamp (uint): current block timestamp as seconds since unix epoch
+gasleft() returns (uint256): remaining gas
+msg.data (bytes calldata): complete calldata
+msg.sender (address): sender of the message (current call)
+msg.sig (bytes4): first four bytes of the calldata (i.e. function identifier)
+msg.value (uint): number of wei sent with the message
+tx.gasprice (uint): gas price of the transaction
+tx.origin (address): sender of the transaction (full call chain)
+*/
+
+
