@@ -488,7 +488,7 @@ function f(uint start, uint daysAfter) public {
 // Special Variables and Functions
 // There are special variables and functions which always exist in the global namespace and are mainly used to provide information about the blockchain or are general-use utility functions.
 
-blockhash(uint blockNumber);    // returns (bytes32): hash of the given block when blocknumber is one of the 256 most recent blocks; otherwise returns zero
+blockhash(uint blockNumber);    //  returns (bytes32): hash of the given block when blocknumber is one of the 256 most recent blocks; otherwise returns zero
 block.chainid;                  //  (uint): current chain id
 block.coinbase;                 //  (address payable): current block miner’s address
 block.difficulty;               //  (uint): current block difficulty
