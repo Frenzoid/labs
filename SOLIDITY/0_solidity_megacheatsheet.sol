@@ -485,7 +485,7 @@ function f(uint start, uint daysAfter) public {
 }
 
 
-// Special Variables and Functions
+// Special Variables, Functions, and access & visibility modifiers.
 // There are special variables and functions which always exist in the global namespace and are mainly used to provide information about the blockchain or are general-use utility functions.
 
 blockhash(uint blockNumber);    //  returns (bytes32): hash of the given block when blocknumber is one of the 256 most recent blocks; otherwise returns zero
@@ -503,12 +503,57 @@ msg.value;                      //  (uint): number of wei sent with the message
 tx.gasprice;                    //  (uint): gas price of the transaction
 tx.origin;                      //  (address): sender of the transaction (full call chain)
 
-
+// variable location cheatsheet
 /*
 state variables are always in storage
 function arguments are always in memory
 local variables of struct, array or mapping type reference storage by default
 local variables of value type (i.e. neither array, nor struct nor mapping) are stored in the stack
+calldata is where data from external calls to functions is stored, parameters of the function turned into bytes.
 */
 
+
+// access modifiers cheatsheet
+/*
+public - everyone can access
+external - Cannot be accessed internally, only externally
+internal - only this contract and contracts inherited from it can access
+private - can be accessed only from this contract
+
+As you can notice private is a subset of internal and external is a subset of public.
+*/
+
+
+// Visibility and Security modifiers cheatsheet.
+/*
+In earlier versions, we would apply the constant modifier to indicate that a function doesn't change the storage state in any way. For example:
+*/
+pragma solidity 0.4.16; 
+
+contract UseConstant {
+
+    string greeting;
+
+    function UseConstant() public {
+        greeting = "Hello";
+    }
+
+    function SayHello() public constant returns(string says) {
+        return greeting;
+    }
+}
+/*
+constant indicates that network verification won't be necessary. Callers receive return values (quickly, from local storage and processing) instead of transaction hashes.
+
+Starting with solc 0.4.17, constant is depricated in favor of two new and more specific modifiers.
+
+View This is generally the replacement for constant. It indicates that the function will not alter the storage state in any way.
+
+Pure This is even more restrictive, indicating that it won't even read the storage state.
+
+A pure function might look something like this very contrived example:
+*/
+function returnTrue() public pure returns(bool response) {
+    return true;
+}
 
