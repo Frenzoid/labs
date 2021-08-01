@@ -553,7 +553,7 @@ function returnTrue() public pure returns(bool response) {
     return true;
 }
 
-
+// https://ethereum.stackexchange.com/questions/13167/are-there-well-solved-and-simple-storage-patterns-for-solidity
 
 //  GAS CONSUMPTION PER OPERATION CODE
 Operation         Gas           Description
