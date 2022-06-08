@@ -10,18 +10,12 @@ contract TransferContract {
 
     function transferTokens(uint256 _amount) public {
         require(_amount > 0);
-        uint256 input = _amount;
-
-        // Locally i dont have this contract deployed
-        // address token = 0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7;
-        //  IERC20(token).transferFrom(
-        //    msg.sender,
-        //    0x4B8C40757A00eD0479e4B8293C61d8178E23d2f1,
-        //    input
-        // );
-    }
-
-    function hello(string calldata salute) public returns (string memory) {
-        return salute;
+        uint256 input = _amount; //It's reverting here?? I don't see the issue
+        address token = 0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7;
+        IERC20(token).transferFrom(
+            msg.sender,
+            0x4B8C40757A00eD0479e4B8293C61d8178E23d2f1,
+            input
+        );
     }
 }

@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+  <script>
+    //const { ethers } = require("ethers");
+    const busdABI = [
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "name",
+        "outputs": [{
+          "name": "",
+          "type": "string"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "assetProtectionRole",
+        "outputs": [{
+          "name": "",
+          "type": "address"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "decimals",
+        "outputs": [{
+          "name": "",
+          "type": "uint8"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "paused",
+        "outputs": [{
+          "name": "",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "owner",
+        "outputs": [{
+          "name": "",
+          "type": "address"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [{
+          "name": "",
+          "type": "string"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "betaDelegateWhitelister",
+        "outputs": [{
+          "name": "",
+          "type": "address"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "proposedOwner",
+        "outputs": [{
+          "name": "",
+          "type": "address"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "EIP712_DOMAIN_HASH",
+        "outputs": [{
+          "name": "",
+          "type": "bytes32"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "supplyController",
+        "outputs": [{
+          "name": "",
+          "type": "address"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        }],
+        "name": "Transfer",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        }],
+        "name": "Approval",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "currentOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "proposedOwner",
+          "type": "address"
+        }],
+        "name": "OwnershipTransferProposed",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "oldProposedOwner",
+          "type": "address"
+        }],
+        "name": "OwnershipTransferDisregarded",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "oldOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newOwner",
+          "type": "address"
+        }],
+        "name": "OwnershipTransferred",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [],
+        "name": "Pause",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [],
+        "name": "Unpause",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "addr",
+          "type": "address"
+        }],
+        "name": "AddressFrozen",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "addr",
+          "type": "address"
+        }],
+        "name": "AddressUnfrozen",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "addr",
+          "type": "address"
+        }],
+        "name": "FrozenAddressWiped",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "oldAssetProtectionRole",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newAssetProtectionRole",
+          "type": "address"
+        }],
+        "name": "AssetProtectionRoleSet",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        }],
+        "name": "SupplyIncreased",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        }],
+        "name": "SupplyDecreased",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "oldSupplyController",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newSupplyController",
+          "type": "address"
+        }],
+        "name": "SupplyControllerSet",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "seq",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "fee",
+          "type": "uint256"
+        }],
+        "name": "BetaDelegatedTransfer",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "oldWhitelister",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newWhitelister",
+          "type": "address"
+        }],
+        "name": "BetaDelegateWhitelisterSet",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "newDelegate",
+          "type": "address"
+        }],
+        "name": "BetaDelegateWhitelisted",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [{
+          "indexed": true,
+          "name": "oldDelegate",
+          "type": "address"
+        }],
+        "name": "BetaDelegateUnwhitelisted",
+        "type": "event"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "initialize",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "initializeDomainSeparator",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [{
+          "name": "",
+          "type": "uint256"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }],
+        "name": "transfer",
+        "outputs": [{
+          "name": "",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [{
+          "name": "_addr",
+          "type": "address"
+        }],
+        "name": "balanceOf",
+        "outputs": [{
+          "name": "",
+          "type": "uint256"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }],
+        "name": "transferFrom",
+        "outputs": [{
+          "name": "",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_spender",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        }],
+        "name": "approve",
+        "outputs": [{
+          "name": "",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [{
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "name": "_spender",
+          "type": "address"
+        }],
+        "name": "allowance",
+        "outputs": [{
+          "name": "",
+          "type": "uint256"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_proposedOwner",
+          "type": "address"
+        }],
+        "name": "proposeOwner",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "disregardProposeOwner",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "claimOwnership",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "reclaimBUSD",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "pause",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "unpause",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_newAssetProtectionRole",
+          "type": "address"
+        }],
+        "name": "setAssetProtectionRole",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_addr",
+          "type": "address"
+        }],
+        "name": "freeze",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_addr",
+          "type": "address"
+        }],
+        "name": "unfreeze",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_addr",
+          "type": "address"
+        }],
+        "name": "wipeFrozenAddress",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [{
+          "name": "_addr",
+          "type": "address"
+        }],
+        "name": "isFrozen",
+        "outputs": [{
+          "name": "",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_newSupplyController",
+          "type": "address"
+        }],
+        "name": "setSupplyController",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_value",
+          "type": "uint256"
+        }],
+        "name": "increaseSupply",
+        "outputs": [{
+          "name": "success",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_value",
+          "type": "uint256"
+        }],
+        "name": "decreaseSupply",
+        "outputs": [{
+          "name": "success",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [{
+          "name": "target",
+          "type": "address"
+        }],
+        "name": "nextSeqOf",
+        "outputs": [{
+          "name": "",
+          "type": "uint256"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "sig",
+          "type": "bytes"
+        },
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "name": "fee",
+          "type": "uint256"
+        },
+        {
+          "name": "seq",
+          "type": "uint256"
+        },
+        {
+          "name": "deadline",
+          "type": "uint256"
+        }],
+        "name": "betaDelegatedTransfer",
+        "outputs": [{
+          "name": "",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "r",
+          "type": "bytes32[]"
+        },
+        {
+          "name": "s",
+          "type": "bytes32[]"
+        },
+        {
+          "name": "v",
+          "type": "uint8[]"
+        },
+        {
+          "name": "to",
+          "type": "address[]"
+        },
+        {
+          "name": "value",
+          "type": "uint256[]"
+        },
+        {
+          "name": "fee",
+          "type": "uint256[]"
+        },
+        {
+          "name": "seq",
+          "type": "uint256[]"
+        },
+        {
+          "name": "deadline",
+          "type": "uint256[]"
+        }],
+        "name": "betaDelegatedTransferBatch",
+        "outputs": [{
+          "name": "",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [{
+          "name": "_addr",
+          "type": "address"
+        }],
+        "name": "isWhitelistedBetaDelegate",
+        "outputs": [{
+          "name": "",
+          "type": "bool"
+        }],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_newWhitelister",
+          "type": "address"
+        }],
+        "name": "setBetaDelegateWhitelister",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_addr",
+          "type": "address"
+        }],
+        "name": "whitelistBetaDelegate",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [{
+          "name": "_addr",
+          "type": "address"
+        }],
+        "name": "unwhitelistBetaDelegate",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    ];
+    const busdAddress = '0x78867BbEeF44f2326bF8DDd1941a4439382EF2A7';
+    const contractAddress = '0x5aaB65E7f34F73e7B1bEd82155aac332E9f1e7C6';
+    const abi = [
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          }
+        ],
+        "name": "transferFrom",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_amount",
+            "type": "uint256"
+          }
+        ],
+        "name": "transferTokens",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    ];
+
+    let provider;
+    let signer;
+    let busdContract;
+    let contract;
+
+    async function connect() {
+      if (typeof window.ethereum !== "undefined") {
+        window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+            chainId: "0x61",
+            rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545"],
+            chainName: "Testnet BSC",
+            nativeCurrency: {
+              name: "BNB",
+              symbol: "BNB",
+              decimals: 18
+            },
+            blockExplorerUrls: ["https://testnet.bscscan.com"]
+          }]
+        });
+
+        try {
+          await ethereum.request({ method: "eth_requestAccounts" });
+        } catch (error) {
+          console.log(error);
+        }
+
+        document.getElementById("connectButton").innerHTML = "Connected";
+        const accounts = await ethereum.request({ method: "eth_accounts" });
+        document.getElementById("connectButton").innerHTML = accounts;
+
+        // Setting the signer here allows both functions to be accessed individually.
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+        signer = provider.getSigner();
+
+        console.log(accounts);
+
+      } else {
+        document.getElementById("connectButton").innerHTML =
+          "Please install MetaMask";
+      }
+    }
+
+    async function transferBUSD() {
+      console.log(transferBUSD);
+      if (typeof window.ethereum !== "undefined") {
+        try {
+          busdContract = new ethers.Contract(busdAddress, busdABI, signer);
+
+          const amount = ethers.utils.parseEther('0.02');
+          busdContract.approve(contractAddress, amount);
+
+          contract = new ethers.Contract(contractAddress, abi, signer);
+        } catch (error) {
+          console.error(error.message, error.data.message);
+        }
+      }
+      else {
+        document.getElementById("transferButton").innerHTML = "Please install MetaMask";
+      }
+    };
+
+    async function transfer2BUSD() {
+      console.log("transfer2BUSD");
+      if (typeof window.ethereum !== "undefined") {
+        contract = new ethers.Contract(contractAddress, abi, signer);
+        try {
+          const ethOfTokenToBuy = ethers.utils.parseEther('0.02');
+          const _return = await contract.transferTokens(10000);
+          console.log(_return);
+        } catch (error) {
+          console.error(error.message, error.data.message);
+        }
+      }
+      else {
+        document.getElementById("transferButton2").innerHTML = "Please install MetaMask";
+      }
+    };
+  </script>
+</head>
+
+<body>
+  <button id="connectButton" onclick="connect()">Connect</button>
+  <button id="transferButton" onclick="transferBUSD()">Transfer</button>
+  <button id="transferButton2" onclick="transfer2BUSD()">Transfer 2</button>
+</body>
+
+</html>
