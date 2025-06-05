@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livia Elena Sabau Malina - CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 240mm;
+            margin: 0 auto;
+            background: white;
+            display: flex;
+            min-height: 297mm;
+        }
+        
+        .sidebar {
+            width: 35%;
+            background: #1e4d72;
+            color: white;
+            padding: 20px 20px 150px 20px;
+            position: relative;
+        }
+        
+        .main-content {
+            width: 65%;
+            padding: 20px 30px;
+        }
+        
+        .profile-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #666;
+        }
+        
+        .name {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .basic-info {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .contact-item i {
+            width: 20px;
+            margin-right: 10px;
+        }
+        
+        .licenses {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .licenses-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .license-list {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .languages {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .specialization-item {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+        
+        .specialization-icon {
+            font-size: 16px;
+            margin-right: 8px;
+        }
+        
+        .main-title {
+            font-size: 28px;
+            color: #1e4d72;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .main-section {
+            margin-bottom: 20px;
+        }
+        
+        .main-section-title {
+            font-size: 20px;
+            color: #1e4d72;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .introduction {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #555;
+            text-align: justify;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #1e4d72;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #1e4d72;
+        }
+        
+        .timeline-date {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e4d72;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-company {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .timeline-description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #555;
+        }
+        
+        .timeline-description ul {
+            margin-left: 15px;
+        }
+        
+        .timeline-description li {
+            margin-bottom: 3px;
+        }
+        
+        .current-role {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1e4d72;
+        }
+        
+        .department {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .department-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e4d72;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .department-icon {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        
+        .specialization {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        .specialization-title {
+            font-weight: bold;
+            color: #1e4d72;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .specialization-skills {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.4;
+        }
+        
+        .skills-category {
+            margin-bottom: 20px;
+        }
+        
+        .skills-category-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e4d72;
+            margin-bottom: 10px;
+        }
+        
+        .skills-list {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .skills-list ul {
+            margin-left: 15px;
+        }
+        
+        .skills-list li {
+            margin-bottom: 3px;
+        }
+        
+        .certification-link {
+            font-size: 12px;
+            color: #666;
+            text-decoration: none;
+            display: block;
+            margin-top: 3px;
+        }
+        
+        .certification-link:hover {
+            color: #1e4d72;
+            text-decoration: underline;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                max-width: none;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="profile-section">
+                <div class="profile-photo">👩‍⚕️</div>
+                <div class="name">Livia Elena Sabau Malina</div>
+                <div class="basic-info">
+                    <div><strong>Nazionalità:</strong> Spagnola</div>
+                    <div><strong>Stato civile:</strong> Sposata</div>
+                    <div><strong>Data di nascita:</strong> 30.03.1972</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">CONTATTI</h3>
+                <div class="contact-item">
+                    <i>🏠</i>
+                    <div>Via Volta, 6900<br>Lugano, Svizzera 🇨🇭</div>
+                </div>
+                <div class="contact-item">
+                    <i>📞</i>
+                    <div>(+34) 656627832</div>
+                </div>
+                <div class="contact-item">
+                    <i>✉️</i>
+                    <div>livi_zzxx@hotmail.com</div>
+                </div>
+                <div class="contact-item">
+                    <i>📱</i>
+                    <div>(+34) 656627832 (WhatsApp)</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">LINGUE</h3>
+                <div class="contact-item">
+                    <i>🇷🇴</i>
+                    <div>Rumeno (Madrelingua)</div>
+                </div>
+                <div class="contact-item">
+                    <i>🇪🇸</i>
+                    <div>Spagnolo (Fluente)</div>
+                </div>
+                <div class="contact-item">
+                    <i>🇮🇹</i>
+                    <div>Italiano (Intermedio)</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">SPECIALIZZAZIONI AVANZATE</h3>
+                <div class="specialization-item">
+                    <span class="specialization-icon">🫁</span>
+                    <strong>Ventilazione Meccanica & RCP Avanzata</strong><br>
+                    Terapia intensiva, intubazione, supporto vitale
+                </div>
+                <div class="specialization-item">
+                    <span class="specialization-icon">🫀</span>
+                    <strong>Cardiologia Critica</strong><br>
+                    ECG, cateterismo, farmaci antiaritmici
+                </div>
+                <div class="specialization-item">
+                    <span class="specialization-icon">🧠</span>
+                    <strong>Neurologia Intensiva</strong><br>
+                    Scala Glasgow, ictus, puntura lombare
+                </div>
+                <div class="specialization-item">
+                    <span class="specialization-icon">🫃</span>
+                    <strong>Trapianti Epatici</strong><br>
+                    Post-operatorio, biopsie, encefalopatia
+                </div>
+                <div class="specialization-item">
+                    <span class="specialization-icon">🦠</span>
+                    <strong>COVID-19 Specialist</strong><br>
+                    Blocco chirurgico, protocolli sicurezza
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">HIGHLIGHTS DI CARRIERA</h3>
+                <div class="specialization-item">
+                    <span class="specialization-icon">⏱️</span>
+                    <strong>30+ Anni di Esperienza</strong><br>
+                    Dal 1994 in ambito sanitario
+                </div>
+                <div class="specialization-item">
+                    <span class="specialization-icon">🏥</span>
+                    <strong>13+ Anni Ospedale Universitario</strong><br>
+                    Attualmente in 3 reparti critici
+                </div>
+                <div class="specialization-item">
+                    <span class="specialization-icon">👩‍🏫</span>
+                    <strong>Supervisore & Formatore</strong><br>
+                    Leadership e training staff
+                </div>
+                <div class="specialization-item">
+                    <span class="specialization-icon">🦠</span>
+                    <strong>Veterana COVID-19</strong><br>
+                    2 anni in blocco chirurgico
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">CERTIFICAZIONI CHIAVE</h3>
+                <div class="license-list">
+                    <strong>2025:</strong> Esperto Terapia Intensiva<br>
+                    <strong>2024:</strong> Emergenze Centri Sanitari<br>
+                    <strong>2023:</strong> Sicurezza del Paziente<br>
+                    <strong>2022:</strong> RCP Avanzata ICU<br>
+                    <strong>2020:</strong> Assistenza COVID-19<br>
+                    <strong>2016:</strong> Interpretazione ECG<br>
+                    <strong>2009:</strong> Suture Chirurgiche<br>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">COMPETENZE CORE</h3>
+                <div class="license-list">
+                    • Ventilazione meccanica<br>
+                    • Monitoraggio cardiaco<br>
+                    • Procedure invasive<br>
+                    • Gestione farmaci critici<br>
+                    • Valutazione neurologica<br>
+                    • Post-trapianto epatico<br>
+                    • Supervisione team<br>
+                    • Formazione personale
+                </div>
+            </div>
+
+            <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.8); line-height: 1.3;">
+                <p>Autorizzo il trattamento dei miei dati personali presenti nel CV ai sensi dell'art. 13 d. lgs. 30 giugno 2003 n. 196 - "Codice in materia di protezione dei dati personali" e dell'art. 13 GDPR 679/16 - "Regolamento europeo sulla protezione dei dati personali".</p>
+                <br>
+                <p><strong>Lugano, Svizzera 🇨🇭, 07/11/2024</strong></p>
+                <br>
+                <p><strong>Livia Elena Sabau Malina</strong></p>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <h1 class="main-title">INTRODUZIONE</h1>
+            <div class="introduction">
+                Infermiera specialista multi-disciplinare con oltre 30 anni di esperienza in ambito ospedaliero critico. Attualmente operativa in tre reparti altamente specializzati (Terapia Intensiva, Intermedia e Rianimazione) presso l'Ospedale Universitario di Alicante, con expertise consolidata in 5 specialità mediche: cardiologia, pneumologia, neurologia, gastroenterologia ed epatologia. Veterana COVID-19 con esperienza diretta nella gestione di pazienti critici durante la pandemia. Competente in procedure invasive avanzate, ventilazione meccanica, monitoraggio cardiaco e gestione post-trapianto. Persona responsabile, autonoma e leader naturale con comprovate capacità di supervisione e formazione del personale.
+            </div>
+
+            <div class="main-section">
+                <h2 class="main-section-title">ESPERIENZA LAVORATIVA</h2>
+                
+                <div class="current-role">
+                    <div class="timeline-date" style="font-size: 16px; color: #1e4d72; font-weight: bold; margin-bottom: 10px;">2011 - Attuale (13+ anni)</div>
+                    <div class="timeline-title" style="font-size: 18px; margin-bottom: 5px;">Infermiera Specialista Multi-Reparto</div>
+                    <div class="timeline-company" style="margin-bottom: 15px;">Ospedale Universitario di Alicante Dr. Balmis - Alicante, Spagna 🇪🇸</div>
+                    
+                    <div class="department">
+                        <div class="department-title">
+                            <span class="department-icon">🚨</span>
+                            TERAPIA INTENSIVA & RIANIMAZIONE
+                        </div>
+                        <div class="timeline-description">
+                            • Gestione apparecchiature mediche avanzate (ventilatori, pompe di infusione)<br>
+                            • Assistenza all'intubazione e cura pazienti intubati<br>
+                            • Supporto vitale avanzato in emergenze<br>
+                            • Supervisione stato neurologico e bilancio liquidi<br>
+                            • Mobilizzazione precoce pazienti critici
+                        </div>
+                    </div>
+
+                    <div class="department">
+                        <div class="department-title">
+                            <span class="department-icon">🏥</span>
+                            TERAPIA INTERMEDIA - 5 SPECIALITÀ
+                        </div>
+                        
+                        <div class="specialization">
+                            <div class="specialization-title">🫀 CARDIOVASCOLARE</div>
+                            <div class="specialization-skills">
+                                Monitoraggio ECG • Cateterismo cardiaco • Insufficienza cardiaca • Farmaci antiaritmici e anticoagulanti
+                            </div>
+                        </div>
+                        
+                        <div class="specialization">
+                            <div class="specialization-title">🧠 NEUROLOGIA</div>
+                            <div class="specialization-skills">
+                                Ictus ischemico/emorragico • Scala Glasgow • Antiepilettici IV • Puntura lombare • Parkinson/Sclerosi multipla
+                            </div>
+                        </div>
+                        
+                        <div class="specialization">
+                            <div class="specialization-title">🫁 PNEUMOLOGIA</div>
+                            <div class="specialization-skills">
+                                Ventilazione meccanica • Aspirazione tracheale • Gas arteriosi • Aerosolterapia BPCO • Broncoscopie
+                            </div>
+                        </div>
+                        
+                        <div class="specialization">
+                            <div class="specialization-title">🫃 MEDICINA DIGESTIVA</div>
+                            <div class="specialization-skills">
+                                Endoscopie/Colonscopie • Sondini naso-gastrici • Malattie infiammatorie intestinali • Sanguinamento GI
+                            </div>
+                        </div>
+                        
+                        <div class="specialization">
+                            <div class="specialization-title">🔬 UNITÀ EPATICA</div>
+                            <div class="specialization-skills">
+                                Cirrosi epatica • Post-trapianto fegato • Biopsie epatiche • Encefalopatia epatica • Lattulosio/Rifaximina
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020 - 2021</div>
+                        <div class="timeline-title">Infermiera Specialist COVID-19</div>
+                        <div class="timeline-company">Blocco Chirurgico COVID-19 - Ospedale Universitario di Alicante 🇪🇸</div>
+                        <div class="timeline-description">
+                            Gestione pazienti intubati COVID-19 in ambiente ad alto rischio. Implementazione protocolli di sicurezza e cure intensive specializzate durante l'emergenza pandemica.
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2017</div>
+                        <div class="timeline-title">Supervisore Infermieristico Senior</div>
+                        <div class="timeline-company">Unità di Cure Mediche Intermedie - Ospedale Universitario di Alicante 🇪🇸</div>
+                        <div class="timeline-description">
+                            Coordinamento assistenza infermieristica, formazione personale neo-assunto, implementazione protocolli assistenziali, audit clinici e gestione emergenze.
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">08/2024</div>
+                        <div class="timeline-title">Volontariato Centro Diurno</div>
+                        <div class="timeline-company">Associazione GenerazionePiù-anziani OCST - Lugano, Ticino 🇨🇭</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2009 - 2011</div>
+                        <div class="timeline-title">Infermiera Volante Multi-Reparto</div>
+                        <div class="timeline-company">Ospedale Universitario di Alicante Dr. Balmis 🇪🇸</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2009 - 2011</div>
+                        <div class="timeline-title">Infermiera Geriatrica</div>
+                        <div class="timeline-company">Residenza Pensionati Ferroviari - San Juan 🇪🇸</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2006 - 2009</div>
+                        <div class="timeline-title">Infermiera di Emergenza</div>
+                        <div class="timeline-company">Croce Rossa Alicante - Alicante 🇪🇸</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2003 - 2018</div>
+                        <div class="timeline-title">Infermiera Domiciliare</div>
+                        <div class="timeline-company">UME: Urgenze Mediche - Alicante 🇪🇸</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2003 - 2006</div>
+                        <div class="timeline-title">Infermiera Cardiovascolare</div>
+                        <div class="timeline-company">Ospedale Cardiovascolare San Vincente del Raspeig 🇪🇸</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">1994 - 1999</div>
+                        <div class="timeline-title">Infermiera Generalista</div>
+                        <div class="timeline-company">Ospedale Municipale di Sebes - Sebes-Alba 🇷🇴</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h2 class="main-section-title">ISTRUZIONE E FORMAZIONE</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">1991 - 1994</div>
+                        <div class="timeline-title">Diploma di Laurea Infermieristica</div>
+                        <div class="timeline-company">Scuola Post-liceale Sanitaria Alba-Iulia - Alba Iulia 🇷🇴</div>
+                        <a href="http://www.scoalafeg.ro" class="certification-link" target="_blank">🔗 www.scoalafeg.ro</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h2 class="main-section-title">QUALIFICHE E CERTIFICAZIONI</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025</div>
+                        <div class="timeline-title">Esperto Universitario in Terapia Intensiva</div>
+                        <div class="timeline-company">Universidad Catolica de San Antonio de Murcia 🇪🇸</div>
+                        <a href="https://www.ucam.edu/" class="certification-link" target="_blank">🔗 www.ucam.edu</a>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024</div>
+                        <div class="timeline-title">Misure di Emergenza nei Centri Sanitari</div>
+                        <div class="timeline-company">Commissione Formazione Continua - Comunità Valenciana 🇪🇸</div>
+                        <a href="https://eves.san.gva.es/es/procediments/comisio-formacio-continuada-prof-sanitaries" class="certification-link" target="_blank">🔗 eves.san.gva.es</a>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023</div>
+                        <div class="timeline-title">Sicurezza del Paziente: Pratiche Cliniche Sicure</div>
+                        <div class="timeline-company">Commissione Formazione Continua - Comunità Valenciana 🇪🇸</div>
+                        <a href="https://eves.san.gva.es/es/procediments/comisio-formacio-continuada-prof-sanitaries" class="certification-link" target="_blank">🔗 eves.san.gva.es</a>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2022</div>
+                        <div class="timeline-title">RCP Avanzata in Terapia Intensiva</div>
+                        <div class="timeline-company">Istituto di Ricerca Sanitaria e Biomedica di Alicante 🇪🇸</div>
+                        <a href="https://isabial.es" class="certification-link" target="_blank">🔗 isabial.es</a>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020</div>
+                        <div class="timeline-title">Assistenza Pazienti COVID-19</div>
+                        <div class="timeline-company">Istituto di Ricerca Sanitaria e Biomedica di Alicante 🇪🇸</div>
+                        <a href="https://isabial.es" class="certification-link" target="_blank">🔗 isabial.es</a>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2019</div>
+                        <div class="timeline-title">RCP Avanzato</div>
+                        <div class="timeline-company">Istituto di Ricerca Sanitaria e Biomedica di Alicante 🇪🇸</div>
+                        <a href="https://isabial.es" class="certification-link" target="_blank">🔗 isabial.es</a>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2016</div>
+                        <div class="timeline-title">Interpretazione Elettrocardiogramma</div>
+                        <div class="timeline-company">Sindacato degli Infermieri di Alicante 🇪🇸</div>
+                        <a href="https://comunidadvalenciana.satse.es/" class="certification-link" target="_blank">🔗 comunidadvalenciana.satse.es</a>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2015</div>
+                        <div class="timeline-title">Aggiornamento Infermieristico</div>
+                        <div class="timeline-company">Sindacato degli Infermieri di Alicante 🇪🇸</div>
+                        <a href="https://comunidadvalenciana.satse.es/" class="certification-link" target="_blank">🔗 comunidadvalenciana.satse.es</a>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2015</div>
+                        <div class="timeline-title">Sessioni Cliniche Infermieristica Medico-Chirurgica</div>
+                        <div class="timeline-company">Commissione Formazione Continua - Comunità Valenciana 🇪🇸</div>
+                        <a href="https://eves.san.gva.es/es/procediments/comisio-formacio-continuada-prof-sanitaries" class="certification-link" target="_blank">🔗 eves.san.gva.es</a>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2009</div>
+                        <div class="timeline-title">Laboratorio di Suture Chirurgiche</div>
+                        <div class="timeline-company">Ordine Ufficiale degli Infermieri di Alicante 🇪🇸</div>
+                        <a href="https://www.enferalicante.org/" class="certification-link" target="_blank">🔗 www.enferalicante.org</a>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">2008</div>
+                        <div class="timeline-title">Corso di Dietetica</div>
+                        <div class="timeline-company">Sindacato degli Infermieri di Alicante 🇪🇸</div>
+                        <a href="https://comunidadvalenciana.satse.es/" class="certification-link" target="_blank">🔗 comunidadvalenciana.satse.es</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h2 class="main-section-title">COMPETENZE TECNICHE SPECIALIZZATE</h2>
+                
+                <div class="skills-category">
+                    <div class="skills-category-title">🚑 Procedure Invasive & Emergenza</div>
+                    <div class="skills-list">
+                        Intubazione e gestione vie aeree • RCP avanzata • Cateterismo cardiaco • Puntura lombare • Posizionamento vie centrali e arteriose • Gestione port-a-cath • Tracheostomia e aspirazione • Bendaggi funzionali e suture
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <div class="skills-category-title">🖥️ Monitoraggio & Diagnostica Avanzata</div>
+                    <div class="skills-list">
+                        Interpretazione ECG e aritmie • Monitoraggio gas arteriosi • Scala Glasgow neurologica • Valutazione funzione epatica • Bilancio idrico e diuresi • Calibrazione monitor e dispositivi medici
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <div class="skills-category-title">💊 Farmacologia Critica</div>
+                    <div class="skills-list">
+                        Antiepilettici endovenosi • Farmaci antiaritmici e anticoagulanti • Vasodilatatori critici • Lattulosio e rifaximina • Aerosolterapia BPCO • Chemioterapici e immunosoppressori post-trapianto
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <div class="skills-category-title">👥 Leadership & Formazione</div>
+                    <div class="skills-list">
+                        Supervisione team infermieristico • Formazione personale neo-assunto • Implementazione protocolli assistenziali • Audit clinici e quality improvement • Coordinamento équipe multidisciplinare • Gestione emergenze
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
